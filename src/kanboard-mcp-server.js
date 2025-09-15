@@ -9,8 +9,7 @@ app.use(express.json());
 // Kanboard Configuration
 const KANBOARD_URL = process.env.KANBOARD_URL || 'http://kanboard';
 const KANBOARD_API_URL = `${KANBOARD_URL}/jsonrpc.php`;
-const KANBOARD_USERNAME = process.env.KANBOARD_USERNAME || 'admin';
-const KANBOARD_PASSWORD = process.env.KANBOARD_PASSWORD || 'admin';
+const KANBOARD_API_KEY = process.env.KANBOARD_API_KEY;
 
 // Helper function to make Kanboard JSON-RPC API requests
 async function kanboardRequest(method, params = {}) {
@@ -25,7 +24,7 @@ async function kanboardRequest(method, params = {}) {
         const response = await axios.post(KANBOARD_API_URL, payload, {
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': 'Basic ' + Buffer.from(`${KANBOARD_USERNAME}:${KANBOARD_PASSWORD}`).toString('base64')
+                'X-API-Auth': KANBOARD_API_KEY
             },
             timeout: 15000
         });
@@ -1016,9 +1015,9 @@ app.listen(PORT, () => {
     console.log(`📡 MCP Endpoint: /mcp`);
     console.log('==========================================');
 
-    if (!KANBOARD_USERNAME || !KANBOARD_PASSWORD) {
-        console.log('⚠️  WARNING: Kanboard credentials not properly set!');
-        console.log('   Check KANBOARD_USERNAME and KANBOARD_PASSWORD');
+    if (!KANBOARD_API_KEY) {
+        console.log('⚠️  WARNING: Kanboard API key not properly set!');
+        console.log('   Set KANBOARD_API_KEY environment variable');
     }
 });
 
