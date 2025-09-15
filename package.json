@@ -1,0 +1,16 @@
+{
+  "name": "mcp-kanboard",
+  "version": "1.0.0",
+  "main": "src/kanboard-mcp-server.js",
+  "scripts": {
+    "start": "node ./src/kanboard-mcp-server.js"
+  },
+  "author": "",
+  "license": "MIT",
+  "description": "",
+  "dependencies": {
+    "axios": "^1.7.7",
+    "cors": "^2.8.5",
+    "express": "^4.19.2"
+  }
+}
