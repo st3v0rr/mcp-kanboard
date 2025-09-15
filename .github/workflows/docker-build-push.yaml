@@ -10,7 +10,7 @@ on:
     branches: [ "main" ]
 
 env:
-  DOCKER_HUB_REPO: st3v0rr/mcp-wikijs
+  DOCKER_HUB_REPO: st3v0rr/mcp-kanboard
 
 jobs:
   build-and-push:
